@@ -1,4 +1,4 @@
-import {Alert, Button, Card, Col, Row} from "react-bootstrap";
+import {Alert, Button, Card, Col, Row, Spinner} from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import {useState} from "react";
 import axios from "axios";
@@ -11,6 +11,8 @@ function Mytext() {
     let [txt, setTxt] = useState('')
     let [txttranslated, setTranslated] = useState('')
     let [err, setErr] = useState({'status': false, 'body': ''})
+    let [waiting, setWaiting] = useState(false)
+    let [show, setShow] = useState(false)
 
 
     let handleChange = (e, choice) => {
@@ -32,16 +34,23 @@ function Mytext() {
     }
 
     let translate = async () => {
+        setShow(false)
         if (chosen_lan !== '' && target_lan !== '' && txt !== '') {
             setErr({'status': false, 'body': ''})
+            setWaiting(true)
             await axios.post(base_url, {
-                "source": chosen_lan, "dest": target_lan, "text": btoa(unescape(encodeURIComponent(txt)))
-                , "version": "free"
+                "source": chosen_lan,
+                "dest": target_lan,
+                "text": btoa(unescape(encodeURIComponent(txt))),
+                "version": "free"
             }, {timeout: 1000000}).then((res) => {
                 console.log("😀 : ", atob(res.data))
                 setTranslated(atob(res.data))
+                setWaiting(false)
+                setShow(true)
             }).catch((err) => {
                 console.log("😪 : ", err)
+                setWaiting(false)
             })
         } else {
             setErr({'status': true, 'body': 'Incomplete Operation !'})
@@ -82,12 +91,24 @@ function Mytext() {
                                 })}
                             </Form.Select>
                         </Card.Title>
+
                         <Card.Text>
-                            <Form.Control style={{height: "20rem"}} as="textarea" value={txttranslated}/>
+                            {waiting && <Spinner animation="border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner>}
+                            {show && <Form.Control style={{height: "20rem"}} as="textarea" value={txttranslated}/>}
                         </Card.Text>
                     </Col>
                     <Col sm="12" className="mt-2">
-                        <Button variant="dark" style={{width: "80%"}} onClick={translate}>Translate Text</Button>
+                        <Button variant="dark" style={{width: "80%"}} onClick={translate}>
+                            {waiting && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true"
+                                                 style={{color: "#0057b7"}}/>}
+
+                            &nbsp;Translate Text&nbsp;
+                            {waiting && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true"
+                                                 style={{color: "#ffd700"}}/>}
+
+                        </Button>
                     </Col>
                 </Row>
 
