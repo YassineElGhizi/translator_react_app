@@ -7,7 +7,6 @@ import Mybody from "./components/body";
 function App() {
     return (
         <div className="App">
-            <Mynav/>
             <Mybody/>
         </div>
     );

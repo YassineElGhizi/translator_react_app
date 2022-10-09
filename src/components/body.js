@@ -1,10 +1,9 @@
-import Container from 'react-bootstrap/Container';
 import Mytext from "./text";
 
 function Mybody() {
-    return (<Container style={{marginTop: "3rem"}}>
+    return (<div>
         <Mytext/>
-    </Container>);
+    </div>);
 }
 
 export default Mybody;

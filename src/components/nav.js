@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 function Mynav() {
-    return (<Navbar bg="dark" expand="lg" variant="dark">
+    return (<Navbar bg="dark" expand="lg" variant="dark" style={{marginBottom : '0px', borderRadius : '0px'}}>
         <Container>
             <Navbar.Brand> <img
                 alt=""
