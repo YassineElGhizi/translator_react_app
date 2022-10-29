@@ -55,7 +55,7 @@ function Mytext() {
                     }
                     formData.append("file", e.target.files[0]);
                     formData.append("langs", JSON.stringify(langs));
-                    axios.post("http://146.190.232.192:5555", formData, {
+                    axios.post("https://api.translateka.com/", formData, {
                         headers: {
                         'Content-Type': 'multipart/form-data'
                         }
@@ -125,7 +125,7 @@ function Mytext() {
                 })
             }
             else{
-                axios.post("http://146.190.232.192/google", {"text" : txt, source_lan: chosen_lan, target_lan: target_lan})
+                axios.post("https://api.translateka.com/google", {"text" : txt, source_lan: chosen_lan, target_lan: target_lan})
                 .then(result => {
                     console.log(result.data)
                     setTranslated(result.data)
@@ -158,7 +158,7 @@ function Mytext() {
                     {" "}
                     Translateka
                 </span>
-                .net
+                .com
                 </h1>
                 <h3>
                 Write and click <b>TRANSLATE</b>
