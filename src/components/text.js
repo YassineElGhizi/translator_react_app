@@ -55,7 +55,7 @@ function Mytext() {
                     }
                     formData.append("file", e.target.files[0]);
                     formData.append("langs", JSON.stringify(langs));
-                    axios.post("http://127.0.0.1:5000/", formData, {
+                    axios.post("http://146.190.232.192:5555", formData, {
                         headers: {
                         'Content-Type': 'multipart/form-data'
                         }
@@ -125,7 +125,7 @@ function Mytext() {
                 })
             }
             else{
-                axios.post("http://127.0.0.1:5000/google", {"text" : txt, source_lan: chosen_lan, target_lan: target_lan})
+                axios.post("http://146.190.232.192/google", {"text" : txt, source_lan: chosen_lan, target_lan: target_lan})
                 .then(result => {
                     console.log(result.data)
                     setTranslated(result.data)
@@ -156,8 +156,8 @@ function Mytext() {
                     data-wow-duration="2s"
                 >
                     {" "}
-                    DeepTranslation
-                </span>{" "}
+                    Translateka
+                </span>
                 .net
                 </h1>
                 <h3>
@@ -179,7 +179,7 @@ function Mytext() {
                             </select>{" "}
                             {/* <Form.Control onChange={(e) => handleChange(e, 4)} type="file" /> */}
                             <input className="hidden" id="files" onChange={(e) => handleChange(e, 4)} type="file" style={{ height: "2rem" }} />
-                            <label style={{ cursor: "pointer", marginLeft: "1em" }} for="files"><i className="fa fa-file-word-o" aria-hidden="true"/>   Select Docx File</label>
+                            {/* <label style={{ cursor: "pointer", marginLeft: "1em" }} for="files"><i className="fa fa-file-word-o" aria-hidden="true"/>   Select Docx File</label> */}
                         </div>
                     <div className="form-group">
                         <textarea
