@@ -110,7 +110,7 @@ function Mytext() {
                     "version": "free"
                 }, {timeout: 1000000}).then((res) => {
                     try{
-                        console.log(atob(res.data));
+                        console.log(decodeURIComponent(escape(atob(res.data))));
                         setTranslated(atob(res.data))
                     }
                     catch(e){
